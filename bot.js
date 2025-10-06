@@ -1,5 +1,10 @@
+// Keep bot alive 24/7
+require('./keep_alive');
+
+// Load environment variables FIRST
+require('dotenv').config();
+
 const { Client, GatewayIntentBits, EmbedBuilder, ActionRowBuilder, ButtonBuilder, ButtonStyle, PermissionFlagsBits, ChannelType } = require('discord.js');
-const keep_alive = require('./keep_alive.js')
 
 const client = new Client({
     intents: [
@@ -12,14 +17,14 @@ const client = new Client({
 
 // Configuration
 const CONFIG = {
-    TOKEN: 'MTQyNDUyMzIxNDk0MzU1NTYwNA.GJUEAq.mbF18UA5fn8DuMtycj0OaNUwEzsH124IktgWm8', // Replace with your actual token
-    TICKET_CATEGORY: 'Tickets',
-    TRANSCRIPT_CHANNEL: 'ticket-logs',
-    STAFF_ROLE: 'Staff',
-    PREFIX: '!',
-    EMBED_COLOR: '#2b2d31',
-    SERVER_NAME: 'SriLife Roleplay',
-    SERVER_LOGO: 'https://res.cloudinary.com/dzummwk1a/image/upload/v1758656689/SriLife_RP_Logo_01_lb30r1.png'
+    TOKEN: process.env.BOT_TOKEN,
+    TICKET_CATEGORY: process.env.TICKET_CATEGORY || 'Tickets',
+    TRANSCRIPT_CHANNEL: process.env.TRANSCRIPT_CHANNEL || 'ticket-logs',
+    STAFF_ROLE: process.env.STAFF_ROLE || 'Staff',
+    PREFIX: process.env.PREFIX || '!',
+    EMBED_COLOR: process.env.EMBED_COLOR || '#2b2d31',
+    SERVER_NAME: process.env.SERVER_NAME || 'SriLife Roleplay',
+    SERVER_LOGO: process.env.SERVER_LOGO || 'https://res.cloudinary.com/dzummwk1a/image/upload/v1758656689/SriLife_RP_Logo_01_lb30r1.png'
 };
 
 let ticketCounter = 1;
